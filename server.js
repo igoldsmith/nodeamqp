@@ -38,9 +38,9 @@ akana.reflect = function(n) {
 };
 
 akana.fibonacci = function(n) {
-    if(n <= 2) {
-        return 1;
-    } else {
-        return akana.fibonacci(n - 1) + akana.fibonacci(n - 2);
-    }
+    var a = 0, b = 1, c;
+    if (n < 3) return 1;
+    while (--n)
+        c = a + b, a = b, b = c;
+    return c;
 };
