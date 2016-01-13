@@ -16,7 +16,7 @@ amqp.connect(url, function(err, conn) {
         }
       }, {noAck: true});
 
-      var headers = {functionName: 'fibonacci'};
+      var headers = {functionName: 'hello'};
       
       ch.sendToQueue('demo',
       new Buffer(num.toString()),
