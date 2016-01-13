@@ -1,9 +1,9 @@
 var akana = {};
 var url = process.env.CLOUDAMQP_URL || "amqp://qlgmscns:kvcZM_64Xvkqzt1vawEwl3xOIwjdXPJQ@hyena.rmq.cloudamqp.com/qlgmscns";
-var open = require('amqplib').connect(url);
+var amqp = require('amqplib/callback_api');
 
 // Consumer
-open.then(function(conn) {
+amqp.connect(url,function(err, conn) {
   conn.createChannel(function(err, ch) {
     var q = 'demo';
 
