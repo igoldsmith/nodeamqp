@@ -5,7 +5,7 @@ amqp.connect(url, function(err, conn) {
   conn.createChannel(function(err, ch) {
     ch.assertQueue('', {exclusive: true}, function(err, q) {
       var corr = generateUuid();
-      var num = parseInt('11');
+      var num = parseInt('10');
 
       console.log(' [x] Requesting fib(%d)', num);
 
@@ -16,7 +16,7 @@ amqp.connect(url, function(err, conn) {
         }
       }, {noAck: true});
 
-      var headers = {functionName: 'reflect'};
+      var headers = {functionName: 'fibonacci'};
       
       ch.sendToQueue('demo',
       new Buffer(num.toString()),
