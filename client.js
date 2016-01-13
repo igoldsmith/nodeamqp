@@ -16,7 +16,7 @@ amqp.connect(url, function(err, conn) {
         }
       }, {noAck: true});
 
-      var headers = {functionName: 'hello'};
+      var headers = {functionName: 'reflect'};
       
       ch.sendToQueue('demo',
       new Buffer(num.toString()),

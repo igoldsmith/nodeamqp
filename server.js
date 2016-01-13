@@ -36,3 +36,11 @@ akana.hello = function(n) {
 akana.reflect = function(n) {
   return n;
 };
+
+akana.fibonacci = function(n) {
+    if(n <= 2) {
+        return 1;
+    } else {
+        return akana.fibonacci(n - 1) + akana.fibonacci(n - 2);
+    }
+};
