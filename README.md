@@ -8,7 +8,7 @@ server.js - a worker process that binds to a CloudAMQP Queue (dynamically creati
 
 ## Client
 
-client.js - a single invocation client that tests the RPC mechanism by putting the function parameter(s) into a message, and setting the functionName header defined in the source clode.
+client.js - a single invocation client that tests the RPC mechanism by putting the second command line argument into a message, and setting the functionName header to the first command line argument.
 
 ## Execution
 
@@ -16,4 +16,4 @@ The project includes a Procfile used by Heroku to define server.js as a worker d
 
 Alternatively you can simply run the worker process locally with ```node server.js```.  If you're going to run this locally you will need to install amqplib with ```npm install amqplib```.
 
-Test it using the client app.  Change the function name header on line 19, and the message that's being sent, then execute ```node client.js```.  That's that.
+Test it using the client app.  Change the function name header on line 19, and the message that's being sent, then execute ```node client.js fibonaaci 10```.  That's that.

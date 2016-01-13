@@ -5,9 +5,10 @@ amqp.connect(url, function(err, conn) {
   conn.createChannel(function(err, ch) {
     ch.assertQueue('', {exclusive: true}, function(err, q) {
       var corr = generateUuid();
-      var num = parseInt('10');
+      var functionName = process.argv[2];
+      var inputString = process.argv[3];
 
-      console.log(' [x] Requesting fib(%d)', num);
+      console.log('Executing: ' + functionName + " with input: " + inputString);
 
       ch.consume(q.queue, function(msg) {
         if (msg.properties.correlationId == corr) {
@@ -16,10 +17,10 @@ amqp.connect(url, function(err, conn) {
         }
       }, {noAck: true});
 
-      var headers = {functionName: 'hello'};
+      var headers = {'functionName': functionName};
       
       ch.sendToQueue('demo',
-      new Buffer(num.toString()),
+      new Buffer(inputString),
       { correlationId: corr, replyTo: q.queue, headers: headers });
     });
   });
