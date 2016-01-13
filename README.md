@@ -1,22 +1,19 @@
+# NodeAMQPDemo
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+This is a simple little application that demonstrates an RPC capability over AMQP.  It has 2 components.
 
+## Server 
 
-Welcome to your Node.js project on Cloud9 IDE!
+server.js - a worker process that binds to a CloudAMQP Queue (dynamically creating the queue on an exchange defined in the source code).  It pulls messages off the queue, using a functionName message header to determine which of the functions in the defined akana namespace to invoke.  It then places the response from the invoked function on the replyto queue specified by the requestor.
 
-This chat example showcases how to use `socket.io` with a static `express` server.
+## Client
 
-## Running the server
+client.js - a single invocation client that tests the RPC mechanism by putting the function parameter(s) into a message, and setting the functionName header defined in the source clode.
 
-1) Open `server.js` and start the app by clicking on the "Run" button in the top menu.
+## Execution
 
-2) Alternatively you can launch the app from the Terminal:
+The project includes a Procfile used by Heroku to define server.js as a worker dyno.  Define a Heroku app and use ```git push heroku master``` to deploy it, and then use ```heroku ps:scale web=0``` and ```heroku ps:scale worker=1``` to configure the app to run only the worker.
 
-    $ node server.js
+Alternatively you can simply run the worker process locally with ```node server.js```.  If you're going to run this locally you will need to install amqplib with ```npm install amqplib```.
 
-Once the server is running, open the project in the shape of 'https://projectname-username.c9.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
+Test it using the client app.  Change the function name header on line 19, and the message that's being sent, then execute ```node client.js```.  That's that.
