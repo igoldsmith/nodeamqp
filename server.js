@@ -30,7 +30,7 @@ amqp.connect(url,function(err, conn) {
 });
 
 akana.hello = function(n) {
-  return "Hello: " + n + " from all of us here at Akana";
+  return "Hello " + n + " from all of us here at Akana";
 };
 
 akana.reflect = function(n) {
