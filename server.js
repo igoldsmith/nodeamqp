@@ -52,3 +52,7 @@ akana.tester = function(n) {
 akana.tester2 = function(n) {
   return "Testing 2 " + n;
 }
+
+akana.tester4 = function(n) {
+  return "Testing 4 " + n;
+}
