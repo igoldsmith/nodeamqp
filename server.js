@@ -44,3 +44,7 @@ akana.fibonacci = function(n) {
         c = a + b, a = b, b = c;
     return c;
 };
+
+akana.tester = function(n) {
+  return "Tester - input: " + n;
+}
