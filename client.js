@@ -8,7 +8,7 @@ amqp.connect(url, function(err, conn) {
       var functionName = process.argv[2];
       var inputString = process.argv[3];
 
-      console.log('Executing: ' + functionName + " with input: " + inputString);
+      console.log('Executing: ' + functionName + "\nWith input: " + inputString);
 
       ch.consume(q.queue, function(msg) {
         if (msg.properties.correlationId == corr) {
